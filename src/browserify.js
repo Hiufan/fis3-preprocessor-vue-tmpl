@@ -6,7 +6,7 @@ var debowerify = require('debowerify');
 
 var babelify = require('babelify');
 var urify = require('./urify');
-// var stringify = require('./stringify');
+var stringify = require('./stringify');
 var isFis3 = require('./version').isFis3;
 
 module.exports = function (file, settings) {
@@ -17,6 +17,7 @@ module.exports = function (file, settings) {
     var isDone = false;
 
     var bundler = browserify(realpath, browerifyOpts);
+    bundler.transform(stringify(['.tpl', '.html'], file.dirname)) // 支持 require(tpl/html)
     bundler.transform(urify(realpath)); // 支持 fis 的 __uri() 资源定位
 
     if(settings.es2015 && settings.es2015.enable) {
