@@ -1,0 +1,35 @@
+{
+  "name": "fis-preprocessor-browserify",
+  "version": "0.2.1",
+  "description": "A browserify preprocessor for fis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csbun/fis-preprocessor-browserify.git"
+  },
+  "keywords": [
+    "fis",
+    "preprocessor",
+    "browserify"
+  ],
+  "author": "Hans Chan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/csbun/fis-preprocessor-browserify/issues"
+  },
+  "homepage": "https://github.com/csbun/fis-preprocessor-browserify#readme",
+  "dependencies": {
+    "browserify": "^11.2.0",
+    "deasync": "^0.1.3",
+    "debowerify": "^1.3.1",
+    "through": "^2.3.8",
+    "babelify": "^7.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0"
+  }
+}
