@@ -4,10 +4,8 @@ var deasync = require('deasync');
 var browserify = require('browserify');
 var debowerify = require('debowerify');
 
-var babelify = require('babelify');
-var urify = require('./urify');
-var stringify = require('./stringify');
-var isFis3 = require('./version').isFis3;
+var babelify = require('babelify'); // es2015 babel 转码
+var embed = require('./embed');  // 支持fis3的资源内嵌功能
 
 module.exports = function (file, settings) {
     var realpath = file.realpath; // 文件的真实路径
@@ -17,26 +15,26 @@ module.exports = function (file, settings) {
     var isDone = false;
 
     var bundler = browserify(realpath, browerifyOpts);
-    bundler.transform(stringify(['.tpl', '.html'], file.dirname)) // 支持 require(tpl/html)
-    bundler.transform(urify(realpath)); // 支持 fis 的 __uri() 资源定位
 
     if(settings.es2015 && settings.es2015.enable) {
         bundler.transform(babelify.configure({presets: settings.es2015.presets}));
     }
 
+    bundler.transform(embed(realpath));
+
+    // 寻找依赖文件
     bundler.on('file', function (depFilePath) {
-        // find dependences
         if (depFilePath !== file.realpath) {
             file.cache.addDeps(depFilePath);
         }
     });
 
-    bundler.bundle(function (err, buff) {
+    bundler.bundle(function (err, buf) {
         if (err) {
             content = 'console.error(' + JSON.stringify(err.message) + ');' +
                         'console.error(' + JSON.stringify(err.annotated) + ');';
         } else {
-            content = buff.toString();
+            content = buf.toString();
         }
         isDone = true;
     });
