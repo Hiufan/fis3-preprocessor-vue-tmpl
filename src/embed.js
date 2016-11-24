@@ -26,7 +26,7 @@ module.exports = function (sourceFilePath) {
                 return embedFn + '(' + quote + depFileRelativePath + quote + ')';                
             };
 
-            var contents = Buffer.concat(chunks).toString('utf8').replace(INLINE_REG, replacer).replace(URI_REG, replacer);
+            var contents = Buffer.concat(data).toString('utf8').replace(INLINE_REG, replacer).replace(URI_REG, replacer);
 
             this.push(contents);
 
