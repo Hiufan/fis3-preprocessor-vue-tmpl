@@ -1,6 +1,6 @@
 {
   "name": "fis3-preprocessor-browserify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "browserify support for fis3.Supportting ES2015 as well.",
   "main": "index.js",
   "scripts": {

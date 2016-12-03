@@ -5,7 +5,8 @@ var browserify = require('browserify');
 var debowerify = require('debowerify');
 
 var babelify = require('babelify'); // es2015 babel 转码
-var embed = require('./embed');  // 支持fis3的资源内嵌功能
+// var embed = require('./embed');  // 支持fis3的资源内嵌功能
+var compiler = require('./compiler');
 
 module.exports = function (file, settings) {
     var realpath = file.realpath; // 文件的真实路径
@@ -20,7 +21,8 @@ module.exports = function (file, settings) {
         bundler.transform(babelify.configure({presets: settings.es2015.presets}));
     }
 
-    bundler.transform(embed(realpath));
+    // bundler.transform(embed(realpath));
+    bundler.transform(compiler(realpath));
 
     // 寻找依赖文件
     bundler.on('file', function (depFilePath) {
