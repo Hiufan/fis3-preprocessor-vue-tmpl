@@ -1,14 +1,14 @@
 {
-  "name": "fis3-preprocessor-browserify",
+  "name": "fis3-preprocessor-vueTmpl",
   "version": "1.0.1",
-  "description": "browserify support for fis3.Supportting ES2015 as well.",
+  "description": "vue2.0 template compiler for fis3 and es2015 supported as well.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hiufan/fis3-preprocessor-browserify.git"
+    "url": "git+https://github.com/Hiufan/fis3-preprocessor-vueTmpl.git"
   },
   "keywords": [
     "fis3",
@@ -18,9 +18,9 @@
   "author": "Hiufan@qq.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Hiufan/fis3-preprocessor-browserify/issues"
+    "url": "https://github.com/Hiufan/fis3-preprocessor-vueTmpl/issues"
   },
-  "homepage": "https://github.com/Hiufan/fis3-preprocessor-browserify#readme",
+  "homepage": "https://github.com/Hiufan/fis3-preprocessor-vueTmpl#readme",
   "dependencies": {
     "browserify": "^11.2.0",
     "deasync": "^0.1.3",
