@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hiufan/fis3-preprocessor-vueTmpl.git"
+    "url": "git+https://github.com/Hiufan/fis3-preprocessor-vue-tmpl.git"
   },
   "keywords": [
     "fis3",
@@ -18,9 +18,9 @@
   "author": "Hiufan@qq.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Hiufan/fis3-preprocessor-vueTmpl/issues"
+    "url": "https://github.com/Hiufan/fis3-preprocessor-vue-tmpl/issues"
   },
-  "homepage": "https://github.com/Hiufan/fis3-preprocessor-vueTmpl#readme",
+  "homepage": "https://github.com/Hiufan/fis3-preprocessor-vue-tmpl#readme",
   "dependencies": {
     "browserify": "^11.2.0",
     "deasync": "^0.1.3",
