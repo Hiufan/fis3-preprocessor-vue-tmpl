@@ -5,10 +5,9 @@ var through = require('through2');
 
 var URI_REG = /\b(__uri)\(\s*('|")([^'"]+)\2\s*\)/g; 
 
-/**
- * Browserify transform
- * change `__uri('path')` to relative path from sourceFilePath
- */
+// 功能：兼容fis3的__uri
+// sourceFilePath: 入口文件路径
+// inputFileRealPath: 其它引用文件的路径
 module.exports = function (sourceFilePath) {
     return function (inputFileRealPath) {
         var data = [];

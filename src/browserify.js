@@ -1,3 +1,10 @@
+/*!
+ * fis3-preprocessor-vueTmpl v1.0.1
+ * copyright 2016 Hiufan Zheng
+ * email: Hiufan@qq.com
+ * Released under the MIT License.
+ */
+
 'use strict';
 
 var deasync = require('deasync');
@@ -5,8 +12,8 @@ var browserify = require('browserify');
 var debowerify = require('debowerify');
 
 var babelify = require('babelify'); // es2015 babel 转码
-// var embed = require('./embed');  // 支持fis3的资源内嵌功能
-var compiler = require('./compiler');
+var embed = require('./embed');  // 兼容fis3的__uri()功能
+var compiler = require('./compiler'); // 替换fis3的__inline()功能，直接进行模板预编译
 
 module.exports = function (file, settings) {
     var realpath = file.realpath; // 文件的真实路径
@@ -17,11 +24,12 @@ module.exports = function (file, settings) {
 
     var bundler = browserify(realpath, browerifyOpts);
 
+    bundler.transform(debowerify); // 支持bower
     if(settings.es2015 && settings.es2015.enable) {
         bundler.transform(babelify.configure({presets: settings.es2015.presets}));
     }
 
-    // bundler.transform(embed(realpath));
+    bundler.transform(embed(realpath));
     bundler.transform(compiler(realpath));
 
     // 寻找依赖文件
