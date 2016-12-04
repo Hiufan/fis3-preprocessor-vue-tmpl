@@ -1,3 +1,10 @@
+/*!
+ * fis3-preprocessor-vueTmpl v1.0.1
+ * (c) 2016 Hiufan
+ * email: Hiufan@qq.com
+ * Released under the MIT License.
+ */
+
 'use strict';
 
 var browserify = require('./src/browserify');

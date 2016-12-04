@@ -8,7 +8,7 @@ var through = require('through2');
 var INLINE_REG = /\b(template)\s*:\s*(__inline)\(\s*['"]([^'"]+)['"]\)/;
 
 function toFunction(code) {
-    return transpile(`function render () {${code}}`);
+    return transpile('function render () {' + code + '}');
 };
 
 module.exports = function (sourceFilePath) {
@@ -21,7 +21,7 @@ module.exports = function (sourceFilePath) {
             try {
                 return fs.readFileSync(depFileRealPath, 'utf-8')
             } catch (e) {
-                console.error('[fis3-preprocessor-browserify] Failed to load template from file: ' + depFilename);
+                console.error('[fis3-preprocessor-vueTmpl] Failed to load template from file: ' + depFilename);
             }
         };
 
@@ -44,7 +44,7 @@ module.exports = function (sourceFilePath) {
             // if the template is not import by __inline syntax,
             // or the file doesn't exists the "template" attribute.
             if(!INLINE_REG.test(contents)) {
-                throw '[fis3-preprocessor-browserify] Unknown error occured before loading the template.'
+                throw '[fis3-preprocessor-vueTmpl] Unknown error occured before loading the template.'
             }
 
             depFilename = contents.match(INLINE_REG)[3];

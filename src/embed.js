@@ -4,11 +4,10 @@ var path = require('path');
 var through = require('through2');
 
 var URI_REG = /\b(__uri)\(\s*('|")([^'"]+)\2\s*\)/g; 
-var INLINE_REG = /\b(__inline)\(\s*('|")([^'"]+)\2\s*\)/g;
 
 /**
  * Browserify transform
- * change `__uri('path')` and `__inline('path')` to relative path from sourceFilePath
+ * change `__uri('path')` to relative path from sourceFilePath
  */
 module.exports = function (sourceFilePath) {
     return function (inputFileRealPath) {
@@ -26,7 +25,7 @@ module.exports = function (sourceFilePath) {
                 return embedFn + '(' + quote + depFileRelativePath + quote + ')';                
             };
 
-            var contents = Buffer.concat(data).toString('utf8').replace(INLINE_REG, replacer).replace(URI_REG, replacer);
+            var contents = Buffer.concat(data).toString('utf8').replace(URI_REG, replacer);
 
             this.push(contents);
 
