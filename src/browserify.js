@@ -1,5 +1,5 @@
 /*!
- * fis3-preprocessor-vueTmpl v1.0.4
+ * fis3-preprocessor-vueTmpl v1.0.5
  * copyright 2016 Hiufan Zheng
  * email: Hiufan@qq.com
  * Released under the MIT License.
@@ -23,8 +23,6 @@ module.exports = function (file, settings) {
     var isDone = false;
 
     var bundler = browserify(realpath, browerifyOpts);
-
-    bundler.transform(debowerify); // 支持bower
     
     if(settings.es2015 && settings.es2015.enable) {
         bundler.transform(babelify.configure({presets: settings.es2015.presets}));
@@ -32,6 +30,8 @@ module.exports = function (file, settings) {
 
     bundler.transform(embed(realpath));
     bundler.transform(compiler(realpath));
+
+    bundler.transform(debowerify); //注意上面的操作都处理完后再支持bower，否则会出错
 
     // 寻找依赖文件
     bundler.on('file', function (depFilePath) {
