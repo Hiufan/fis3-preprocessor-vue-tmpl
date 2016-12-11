@@ -1,5 +1,5 @@
 /*!
- * fis3-preprocessor-vueTmpl v1.0.1
+ * fis3-preprocessor-vueTmpl v1.0.4
  * (c) 2016 Hiufan
  * email: Hiufan@qq.com
  * Released under the MIT License.
