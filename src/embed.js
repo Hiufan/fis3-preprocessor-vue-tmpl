@@ -1,3 +1,10 @@
+/*!
+ * fis3-preprocessor-vueTmpl v1.0.3
+ * copyright 2016 Hiufan Zheng
+ * email: Hiufan@qq.com
+ * Released under the MIT License.
+ */
+
 'use strict';
 
 var path = require('path');
