@@ -1,6 +1,6 @@
 {
   "name": "fis3-preprocessor-vue-tmpl",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "vue2.0 template compiler for fis3 and es2015 supported as well.",
   "main": "index.js",
   "scripts": {
@@ -26,9 +26,7 @@
     "deasync": "^0.1.3",
     "debowerify": "^1.3.1",
     "through2": "^2.0.1",
-    "babel-preset-es2015-native-modules": "^6.9.4",
     "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
