@@ -37,14 +37,16 @@ npm install fis3-preprocessor-vue-tmpl -g
 ```js
 //fis-conf.js
 
-fis.config.set('settings.preprocessor.browserify', {
-    browserify: {
-        // debug: true,
-    },
-    es2015: {
-        enable: true,
-        presets: ['es2015','react', 'stage-2']
-    }
+fis.match('main.js', {
+    preprocessor: fis.plugin('vue-tmpl', {
+        browserify: {
+            debug: true
+        },
+        es2015: {
+            enable: true,
+            presets: ['es2015', 'stage-2']
+        }        
+    })
 });
 
 ```
