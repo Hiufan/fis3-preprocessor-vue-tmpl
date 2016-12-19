@@ -1,5 +1,5 @@
 /*!
- * fis3-preprocessor-vueTmpl v1.0.7
+ * fis3-preprocessor-vueTmpl
  * copyright 2016 Hiufan Zheng
  * email: Hiufan@qq.com
  * Released under the MIT License.
