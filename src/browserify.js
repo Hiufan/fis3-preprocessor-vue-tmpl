@@ -21,11 +21,11 @@ module.exports = function (file, settings) {
     var browerifyOpts = settings.browserify || {};
     var content = '';
     var isDone = false;
-
+    var relativeTo = settings.relativeTo || ''
     var bundler = browserify(realpath, browerifyOpts);
     
     bundler.transform(embed(realpath));
-    bundler.transform(compiler(realpath));
+    bundler.transform(compiler(file,relativeTo));
 
     if(settings.es2015 && settings.es2015.enable) {
         bundler.transform(babelify.configure({presets: settings.es2015.presets}));

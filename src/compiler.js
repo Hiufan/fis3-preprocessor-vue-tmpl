@@ -19,21 +19,37 @@ function toFunction(code) {
     return transpile('function render () {' + code + '}');
 };
 
-// 功能：在构建阶段先对模板文件进行编译
-// sourceFilePath: 入口文件路径
-// inputFileRealPath: 其它引用文件的路径
-module.exports = function (sourceFilePath) {
+/**
+ * 在构建阶段先对模板文件进行编译
+ * @param {Object} file fis的file对象
+ * @param {String} inputFileRealPath 其它引用文件的路径
+ */
+module.exports = function (file, relativeTo) {
     return function (inputFileRealPath) {
         var data = [];
 
         var loadTemplate = function (depFilename) {
             var depFileRealPath = path.resolve(path.dirname(inputFileRealPath), depFilename);
+            var temFile = fis.file(depFileRealPath, {isHtmlLike: true});
+            var content = temFile.getContent();
+
+            file.cache.addDeps(depFileRealPath);
             
-            try {
-                return fs.readFileSync(depFileRealPath, 'utf-8')
-            } catch (e) {
-                console.error('[fis3-preprocessor-vueTmpl] Failed to load template from file: ' + depFilename);
-            }
+            content = fis.compile.partial(content, temFile, {
+               ext: 'html'
+            });
+
+            // 触发相对路径调整
+            var relativeToFile = relativeTo ? fis.project.lookup(relativeTo).file : file;
+            temFile.relativeBody = content;
+            var message = {
+                file: temFile,
+                relativeTo: relativeToFile
+            };
+            fis.emit('plugin:relative:fetchContent',message)
+            message.content && (content =  message.content);
+
+            return content;
         };
 
         var transformFn = function (chunk, enc, cb) {
