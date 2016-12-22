@@ -40,10 +40,11 @@ module.exports = function (file, relativeTo) {
             });
 
             // 触发相对路径调整
+            var relativeToFile = relativeTo ? fis.project.lookup(relativeTo).file : file;
             temFile.relativeBody = content;
             var message = {
                 file: temFile,
-                relativeTo: fis.project.lookup(relativeTo).file
+                relativeTo: relativeToFile
             };
             fis.emit('plugin:relative:fetchContent',message)
             message.content && (content =  message.content);
