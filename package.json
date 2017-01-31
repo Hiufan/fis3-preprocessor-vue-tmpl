@@ -1,6 +1,6 @@
 {
   "name": "fis3-preprocessor-vue-tmpl",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "vue2.0 template compiler for fis3 and es2015 supported as well.",
   "main": "index.js",
   "scripts": {

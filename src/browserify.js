@@ -14,12 +14,6 @@ var envify = require('envify/custom');
 var babelify = require('babelify');
 var embed = require('./embed');
 
-require('babel-preset-es2015');
-require('babel-preset-stage-0');
-require('babel-preset-stage-1');
-require('babel-preset-stage-2');
-require('babel-preset-stage-3');
-
 module.exports = function (file, settings) {
     var realpath = file.realpath; // 文件的真实路径
     var dirname = file.dirname; // 文件的目录名
@@ -31,7 +25,11 @@ module.exports = function (file, settings) {
 
     // es2015 babel 转码
     if(settings.es2015 && settings.es2015.enable) {
-        bundler.transform(babelify.configure({presets: settings.es2015.presets}));
+        bundler.transform(babelify.configure({
+            presets: settings.es2015.presets.map(function (item) {
+                return require.resolve('babel-preset-' + item);
+            })
+        }));
     }
 
     // 处理template option和fis的内置语法
