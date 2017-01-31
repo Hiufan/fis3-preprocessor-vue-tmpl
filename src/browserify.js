@@ -14,6 +14,12 @@ var envify = require('envify/custom');
 var babelify = require('babelify');
 var embed = require('./embed');
 
+require('babel-preset-es2015');
+require('babel-preset-stage-0');
+require('babel-preset-stage-1');
+require('babel-preset-stage-2');
+require('babel-preset-stage-3');
+
 module.exports = function (file, settings) {
     var realpath = file.realpath; // 文件的真实路径
     var dirname = file.dirname; // 文件的目录名
