@@ -9,11 +9,10 @@
 
 var deasync = require('deasync');
 var browserify = require('browserify');
-var debowerify = require('debowerify');
+var envify = require('envify/custom');
 
-var babelify = require('babelify'); // es2015 babel 转码
-var embed = require('./embed');  // 兼容fis3的__uri()功能
-var compiler = require('./compiler'); // 替换fis3的__inline()功能，直接进行模板预编译
+var babelify = require('babelify');
+var embed = require('./embed');
 
 module.exports = function (file, settings) {
     var realpath = file.realpath; // 文件的真实路径
@@ -21,17 +20,26 @@ module.exports = function (file, settings) {
     var browerifyOpts = settings.browserify || {};
     var content = '';
     var isDone = false;
-    var relativeTo = settings.relativeTo || ''
-    var bundler = browserify(realpath, browerifyOpts);
-    
-    bundler.transform(embed(realpath));
-    bundler.transform(compiler(file,relativeTo));
 
+    var bundler = browserify(realpath, browerifyOpts);
+
+    // es2015 babel 转码
     if(settings.es2015 && settings.es2015.enable) {
         bundler.transform(babelify.configure({presets: settings.es2015.presets}));
     }
 
-    bundler.transform(debowerify); //注意上面的操作都处理完后再支持bower，否则会出错
+    // 处理template option和fis的内置语法
+    bundler.transform(embed(file));
+
+    // 生产环境下优化vue
+    var mediaReg = /pro|prod|product|production/i;
+    var isProd = mediaReg.test(fis.project.currentMedia());
+    if (isProd) {
+        bundler.transform(envify({ 
+            _: 'purge',
+            NODE_ENV: 'production'
+        }), { global: true });
+    }
 
     // 寻找依赖文件
     bundler.on('file', function (depFilePath) {
