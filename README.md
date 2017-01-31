@@ -7,7 +7,7 @@
 
 - commonjs方式引用js模块
 - babel解析ES2015语法
-- 直接引用npm/bower模块
+- 直接引用npm模块
 - 构建时预编译vue2.0的模板为`Render函数`
 - 保持对fis3内置语法（`__inline`/`__uri()`）的支持
 
