@@ -10,6 +10,7 @@
 var deasync = require('deasync');
 var browserify = require('browserify');
 var envify = require('envify/custom');
+var sassify = require('sassify');
 
 var babelify = require('babelify');
 var embed = require('./embed');
@@ -35,10 +36,14 @@ module.exports = function (file, settings) {
     // 处理template option和fis的内置语法
     bundler.transform(embed(file));
 
+    // 嵌入sass
+    bundler.transform(sassify, {
+        'auto-inject': true,
+        sourceMap: browerifyOpts.debug
+    });    
+
     // 生产环境下优化vue
-    var mediaReg = /pro|prod|product|production/i;
-    var isProd = mediaReg.test(fis.project.currentMedia());
-    if (isProd) {
+    if (!browerifyOpts.debug) {
         bundler.transform(envify({ 
             _: 'purge',
             NODE_ENV: 'production'
